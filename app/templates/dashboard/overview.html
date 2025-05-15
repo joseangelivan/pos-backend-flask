@@ -1,1 +1,54 @@
+{% extends "base.html" %}
 
+{% block content %}
+<div class="dashboard-header">
+    <h1>Bienvenido, {{ current_user.name }}</h1>
+    <p class="lead">Gestión de tus puntos de venta</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card stat-card">
+            <div class="card-body">
+                <h5 class="card-title">Puntos de Venta</h5>
+                <p class="stat-number">{{ points_of_sale|length }}</p>
+            </div>
+        </div>
+    </div>
+    <!-- Más estadísticas -->
+</div>
+
+<div class="mt-4">
+    <h3>Tus Puntos de Venta</h3>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Ubicación</th>
+                    <th>Ventas Hoy</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pos in points_of_sale %}
+                <tr>
+                    <td>{{ pos.name }}</td>
+                    <td>{{ pos.location }}</td>
+                    <td>{{ pos.daily_sales }}</td>
+                    <td>
+                        <span class="badge bg-{{ 'success' if pos.is_active else 'danger' }}">
+                            {{ 'Activo' if pos.is_active else 'Inactivo' }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('pos_details', pos_id=pos.id) }}" class="btn btn-sm btn-outline-primary">Ver</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
