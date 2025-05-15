@@ -7,3 +7,6 @@ PyJWT
 gunicorn
 Flask-Static-Digest
 marshmallow
+flask-login
+flask-wtf
+email-validator
