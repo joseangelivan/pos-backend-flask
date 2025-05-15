@@ -5,3 +5,5 @@ psycopg2-binary
 python-dotenv
 PyJWT
 gunicorn
+Flask-Static-Digest
+marshmallow
